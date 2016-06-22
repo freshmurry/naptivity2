@@ -1,1 +1,1 @@
-This is my AirBnB project base off of what I learned in Code4Startup.
+This is my AirBnB Clone project base off of what I learned in Code4Startup.
