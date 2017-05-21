@@ -33,5 +33,5 @@ gem 'tzinfo-data'
 
 group :production do
 	gem 'pg'
-	gem 'rails_12Factor'
+	gem 'rails_12factor'
 end	
