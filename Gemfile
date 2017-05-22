@@ -20,6 +20,10 @@ gem 'figaro'
 gem 'toastr-rails'
 gem 'paperclip', git: "git://github.com/thoughtbot/paperclip.git"
 gem 'geocoder'
+gem 'private_pub'
+gem 'thin'
+gem 'faye-websocket'
+gem "ransack"
 gem 'jquery-ui-rails'
 gem 'aws-sdk', '>= 2.0.0'
 gem 'railties', '~> 4.2', '>= 4.2.6'

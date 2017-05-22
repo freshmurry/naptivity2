@@ -8,6 +8,11 @@ class RoomsController < ApplicationController
 
   def show
     @photos = @room.photos
+
+    @booked = Reservation.where("room_id = ? AND user_id = ?", @room.id, current_user.id).present? if current_user
+
+    @reviews = @room.reviews
+    @hasReview = @reviews.find_by(user_id: current_user.id) if current_user
   end
 
   def new
@@ -56,11 +61,11 @@ class RoomsController < ApplicationController
   end
 
   private
-  def set_room
-    @room = Room.find(params[:id])
-  end
+    def set_room
+      @room = Room.find(params[:id]) 
+    end
 
-  def room_params
-    params.require(:room).permit(:home_type, :room_type, :accomodate, :bed_room, :bath_room, :listing_name, :summary, :address, :is_tv, :is_kitchen, :is_air, :is_heating, :is_internet, :price, :active)
-  end
+    def room_params
+      params.require(:room).permit(:home_type, :room_type, :accommodate, :bed_room, :bath_room, :listing_name, :summary, :address, :is_tv, :is_kitchen, :is_air, :is_heating, :is_internet, :price, :active)
+    end
 end
