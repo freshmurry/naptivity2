@@ -13,16 +13,18 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'sass-rails', '>= 3.2'
-
 gem 'devise'
-
-gem 'toastr-rails'
-
 gem 'omniauth'
 gem 'omniauth-facebook'
+gem 'figaro'
+gem 'toastr-rails'
+gem 'paperclip', git: "git://github.com/thoughtbot/paperclip.git"
+gem 'geocoder'
+gem 'jquery-ui-rails'
+gem 'aws-sdk', '>= 2.0.0'
 gem 'railties', '~> 4.2', '>= 4.2.6'
 
-group :development, :test do
+group :development, :development do
   gem 'byebug', '>= 4.2.6'
   gem 'web-console', '~> 2.0'
   gem 'spring'
@@ -32,6 +34,6 @@ end
 gem 'tzinfo-data'
 
 group :production do
-	gem 'pg', '>=0.18.5'
+	gem 'pg'
 	gem 'rails_12factor'
 end
