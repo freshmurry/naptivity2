@@ -7,16 +7,22 @@ class ApplicationRecord < ActiveRecord::Base
               :controllers => {:omniauth_callbacks => 'omniauth_callbacks',
                                 :registrations => 'registrations'
                               }
+    
+    resources :charges, only: [:new, :create]
+    devise_for :users
+    resources :posts
+    root to: 'posts#index'
+  end
 
-  resources :users, only: [:show]
-  resources :rooms
-  resources :photos
+    resources :users, only: [:show]
+    resources :rooms
+    resources :photos
   
-  resources :rooms do
+    resources :rooms do
     resources :reservations, only: [:create]
   end
 
-  resources :conversations, only: [:index, :create] do
+    resources :conversations, only: [:index, :create] do
     resources :messages, only: [:index, :create]
   end
   

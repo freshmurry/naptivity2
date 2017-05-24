@@ -27,6 +27,8 @@ gem "ransack"
 gem 'jquery-ui-rails'
 gem 'aws-sdk', '>= 2.0.0'
 gem 'railties', '~> 4.2', '>= 4.2.6'
+gem 'stripe'
+gem 'dotenv-rails', :groups => [:development, :test]
 
 group :development, :development do
   gem 'byebug', '>= 4.2.6'
