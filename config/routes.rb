@@ -9,10 +9,8 @@ class ApplicationRecord < ActiveRecord::Base
                               }
     
     resources :charges, only: [:new, :create]
-    devise_for :users
-    resources :posts
-    root to: 'posts#index'
-  end
+    # resources :posts
+    # root to: 'posts#index'
 
     resources :users, only: [:show]
     resources :rooms
