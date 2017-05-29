@@ -8,7 +8,7 @@ class CreateRooms < ActiveRecord::Migration
       t.integer :bath_room
       t.string :listing_name
       t.text :summary
-      t.string :adress
+      t.string :address
       t.boolean :is_tv
       t.boolean :is_kitchen
       t.boolean :is_air

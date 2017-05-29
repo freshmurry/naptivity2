@@ -1,4 +1,3 @@
-
 # encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
@@ -12,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170521075808) do
+ActiveRecord::Schema.define(version: 20170521075714) do
 
   create_table "conversations", force: :cascade do |t|
     t.integer  "sender_id"
@@ -53,7 +52,6 @@ ActiveRecord::Schema.define(version: 20170521075808) do
     t.integer  "total"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean  "status"
   end
 
   add_index "reservations", ["room_id"], name: "index_reservations_on_room_id"
@@ -79,7 +77,7 @@ ActiveRecord::Schema.define(version: 20170521075808) do
     t.integer  "bath_room"
     t.string   "listing_name"
     t.text     "summary"
-    t.string   "address"
+    t.string   "adress"
     t.boolean  "is_tv"
     t.boolean  "is_kitchen"
     t.boolean  "is_air"
