@@ -13,7 +13,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'sass-rails', '>= 3.2'
-gem 'devise'
+gem 'devise', '~> 3'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'figaro'
@@ -21,7 +21,7 @@ gem 'toastr-rails'
 gem 'paperclip', git: "git://github.com/thoughtbot/paperclip.git"
 gem 'geocoder'
 gem 'private_pub'
-gem 'thin'
+# gem 'thin'
 gem 'faye-websocket'
 gem "ransack"
 gem 'jquery-ui-rails'
@@ -29,6 +29,7 @@ gem 'aws-sdk', '>= 2.0.0'
 gem 'railties', '~> 4.2', '>= 4.2.6'
 gem 'stripe'
 gem 'dotenv-rails', :groups => [:development, :test]
+gem 'protected_attributes'
 
 group :development, :development do
   gem 'byebug', '>= 4.2.6'

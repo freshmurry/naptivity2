@@ -1,130 +1,83 @@
-# class ReservationsController < ApplicationController
-# 	before_action :authenticate_user!
+class ReservationsController < ApplicationController
+  before_action :authenticate_user!, except: [:notify]
 
-# 	def preload
-# 		room = Room.find(params[:room_id])
-# 		today = Date.today
-# 		reservations = room.reservations.where("start_date >= ? OR end_date >= ?", today, today) 
-	
-# 		render json: reservations
-# 	end
+  def preload
+    room = Room.find(params[:room_id])
+    today = Date.today
+    reservations = room.reservations.where("start_date >= ? OR end_date >= ?", today, today)
 
-# 	def preview
-# 		start_date = Date.parse(params[:start_date])
-# 		end_date = Date.parse(params[:end_date])
+    render json: reservations
 
-# 		output = {
-# 			conflict: is_conflict(start_date, end_date)
-# 		}
+  end
 
-# 		render json: output
-# 	end
+  def preview
+    start_date = Date.parse(params[:start_date])
+    end_date = Date.parse(params[:end_date])
 
-# 	def create
-# 		@reservation = current_user.reservations.create(reservation_params)
+    output = {
+      conflict: is_conflict(start_date, end_date)
+    }
+    render json: output
+  end
 
-# 		redirect_to @reservation.room, notice: "Your reservation has been created"
-# 	end
+  def create
+    @reservation = current_user.reservations.create(reservation_params)
 
-# 	def your_trips
-# 		@trips = current_user.reservations
-# 	end
+    if @reservation
 
-# 	def your_reservations
-# 		@rooms = current_user.rooms
-# 	end
+      # send request to PayPal
+      values = {
+        business: 'weng8916-facilitator@gmail.com',
+        cmd: '_xclick',
+        upload: 1,
+        notify_url: 'http://airalien.xyz/notify',
+        amount: @reservation.total,
+        item_name: @reservation.room.listing_name,
+        item_number: @reservation.id,
+        quantity: '1',
+        return: 'http://airalien.xyz/your_trips' #'http://########.ngrok.io/your_trips'
+      }
 
-# 	private
-# 		def is_conflict(start_date, end_date)
-# 			room = Room.find(params[:room_id])
+      redirect_to "https://www.sandbox.paypal.com/cgi-bin/webscr?" + values.to_query
+    else
+      redirect_to @reservation.room, alert: "Oops, something went wrong..."
+    end
+  end
 
-# 			check = room.reservations.where("? < start_date AND end_date < ?", start_date, end_date)
-# 			check.size > 0? true: false
-# 		end
+  protect_from_forgery except: [:notify]
+  def notify
+    print 'hello'
+    params.permit!
+    status = params[:payment_status]
 
-# 		def reservation_params
-# 			params.require(:reservation).permit(:start_date, :end_date, :price, :total, :room_id)
-# 		end
-# end
+    reservation = Reservation.find(params[:item_number])
 
-# class ReservationsController < ApplicationController
-# 	before_action :authenticate_user!, except: [:notify]
+    if status == "Completed"
+      reservation.update_attributes status: true
+    else
+      reservation.destroy
+    end
 
-# 	def preload
-# 		room = Room.find(params[:room_id])
-# 		today = Date.today
-# 		reservations = room.reservations.where("start_date >= ? OR end_date >= ?", today, today)
+    render nothing: true
+  end
 
-# 		render json: reservations
-# 	end
+  protect_from_forgery except: [:your_trips]
+  def your_trips
+    @trips = current_user.reservations.where("status = ?", true)
+  end
 
-# 	def preview
-# 		start_date = Date.parse(params[:start_date])
-# 		end_date = Date.parse(params[:end_date])
+  def your_reservations
+    @rooms = current_user.rooms
+  end
 
-# 		output = {
-# 			conflict: is_conflict(start_date, end_date)
-# 		}
+  private
+    def is_conflict(start_date, end_date)
+      room =Room.find(params[:room_id])
 
-# 		render json: output
-# 	end
-
-# 	def create
-# 		@reservation = current_user.reservations.create(reservation_params)
-
-# 		if @reservation
-# 			# send request to PayPal
-# 			values = {
-# 				business: 'demo.code4startup-facilitator@gmail.com',
-# 				cmd: '_xclick',
-# 				upload: 1,
-# 				notify_url: 'http://22ee1588.ngrok.io/notify',
-# 				amount: @reservation.total,
-# 				item_name: @reservation.room.listing_name,
-# 				item_number: @reservation.id,
-# 				quantity: '1',
-# 				return: 'http://22ee1588.ngrok.io/your_trips'
-# 			}
-
-# 			redirect_to "https://www.sandbox.paypal.com/cgi-bin/webscr?" + values.to_query
-# 		else
-# 			redirect_to @reservation.room, alert: "Oops, something went wrong..."
-# 		end
-# 	end
-
-	protect_from_forgery except: [:notify]
-	def notify
-		params.permit!
-		status = params[:payment_status]
-
-		reservation = Reservation.find(params[:item_number])
-
-		if status == "Completed"
-			reservation.update_attributes status: true
-		else
-			reservation.destroy
-		end
-
-		render nothing: true
-	end
-
-	protect_from_forgery except: [:your_trips]
-	def your_trips
-		@trips = current_user.reservations.where("status = ?", true)
-	end
-
-	def your_reservations
-		@rooms = current_user.rooms
-	end
-
-	private
-		def is_conflict(start_date, end_date)
-			room = Room.find(params[:room_id])
-
-			check = room.reservations.where("? < start_date AND end_date < ?", start_date, end_date)
-			check.size > 0? true : false
-		end
-
-		def reservation_params
-			params.require(:reservation).permit(:start_date, :end_date, :price, :total, :room_id)
-		end
+      check = room.reservations.where("? < start_date AND end_date < ?", start_date, end_date)
+      check.size > 0 ? true : false
+    end
+    def reservation_params
+      params.require(:reservation).permit(:start_date, :end_date, :price, :total, :room_id)
+    end
+end
