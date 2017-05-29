@@ -1,3 +1,4 @@
+
 # encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
@@ -78,7 +79,7 @@ ActiveRecord::Schema.define(version: 20170521075808) do
     t.integer  "bath_room"
     t.string   "listing_name"
     t.text     "summary"
-    t.string   "adress"
+    t.string   "address"
     t.boolean  "is_tv"
     t.boolean  "is_kitchen"
     t.boolean  "is_air"
