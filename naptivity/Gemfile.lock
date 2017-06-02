@@ -52,6 +52,7 @@ GEM
     arel (6.0.4)
     autoprefixer-rails (7.1.1)
       execjs
+<<<<<<< HEAD
     aws-sdk (2.9.28)
       aws-sdk-resources (= 2.9.28)
     aws-sdk-core (2.9.28)
@@ -59,6 +60,25 @@ GEM
       jmespath (~> 1.0)
     aws-sdk-resources (2.9.28)
       aws-sdk-core (= 2.9.28)
+=======
+<<<<<<< HEAD
+    aws-sdk (2.9.28)
+      aws-sdk-resources (= 2.9.28)
+    aws-sdk-core (2.9.28)
+      aws-sigv4 (~> 1.0)
+      jmespath (~> 1.0)
+    aws-sdk-resources (2.9.28)
+      aws-sdk-core (= 2.9.28)
+=======
+    aws-sdk (2.9.25)
+      aws-sdk-resources (= 2.9.25)
+    aws-sdk-core (2.9.25)
+      aws-sigv4 (~> 1.0)
+      jmespath (~> 1.0)
+    aws-sdk-resources (2.9.25)
+      aws-sdk-core (= 2.9.25)
+>>>>>>> 22827491154bcc3befbe2434e091608dfa9cd6fb
+>>>>>>> 9508dca3b88ad9cdd634cdce20706992a8958c09
     aws-sigv4 (1.0.0)
     bcrypt (3.1.11)
     bcrypt (3.1.11-x86-mingw32)
@@ -125,7 +145,15 @@ GEM
       activesupport (>= 4.2.0)
     hashie (3.5.5)
     http_parser.rb (0.6.0)
+<<<<<<< HEAD
     i18n (0.8.4)
+=======
+<<<<<<< HEAD
+    i18n (0.8.4)
+=======
+    i18n (0.8.1)
+>>>>>>> 22827491154bcc3befbe2434e091608dfa9cd6fb
+>>>>>>> 9508dca3b88ad9cdd634cdce20706992a8958c09
     jbuilder (2.6.4)
       activesupport (>= 3.0.0)
       multi_json (>= 1.2)
@@ -301,7 +329,15 @@ DEPENDENCIES
   sass-rails (>= 3.2)
   sdoc (~> 0.4.0)
   spring
+<<<<<<< HEAD
   sqlite3 (= 1.3.13)
+=======
+<<<<<<< HEAD
+  sqlite3 (= 1.3.13)
+=======
+  sqlite3
+>>>>>>> 22827491154bcc3befbe2434e091608dfa9cd6fb
+>>>>>>> 9508dca3b88ad9cdd634cdce20706992a8958c09
   stripe
   toastr-rails
   turbolinks
