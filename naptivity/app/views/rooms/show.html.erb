@@ -19,7 +19,7 @@
 					</div>
 
 					<div class="col-md-9">
-						<h4><%= @room.listing_name %></h4>
+						<h2><strong><%= @room.listing_name %></strong></h2>
 						<%= @room.address %>
 
 						<div class="row text-center row-space-1">
@@ -33,7 +33,7 @@
 								<i class="fa fa-bed fa-2x"></i>
 							</div>							
 							<div class="col-sm-3">
-								<i class="fa fa-ship fa-2x"></i>
+								<i class="fa fa-bath"></i>
 							</div>
 						</div>
 
@@ -42,7 +42,7 @@
 								<%= @room.home_type %>
 							</div>
 							<div class="col-sm-3">
-								<%= @room.accomodate %> <%= @room.accomodate > 1? "Guests" : "Guest" %>
+								<%= @room.accommodate %> <%= @room.accommodate > 1? "Guests" : "Guest" %>
 							</div>
 							<div class="col-sm-3">
 								<%= @room.bed_room %> <%= @room.bed_room > 1? "Bedrooms" : "bed_room" %>
